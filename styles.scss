@@ -1,0 +1,117 @@
+$text-color: #070707;
+$primary-color: #eed5d5;
+/*cambia el color del fondo */
+$hover-color: #e20e78;
+$transition-time: 0.3s;
+$delay-time: 0.1s;
+$card-bg-color: #fff1c3;
+
+body {
+
+    background-color: #fff;
+}
+
+h1 {
+    text-align: center;
+    color: #161718;
+}
+
+@mixin transform($property) {
+    -webkit-transform: $property;
+    -moz-transform: $property;
+    -ms-transform: $property;
+    transform: $property;
+}
+
+@mixin animation($property) {
+    -webkit-animation: $property;
+    -moz-animation: $property;
+    -o-animation: $property;
+    animation: $property;
+}
+
+.navbar {
+    background-color: $primary-color;
+    padding: 1rem;
+    width: 100%;
+    position: relative;
+
+
+    @supports (position: sticky) {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+        padding-left: 0;
+        margin: 0;
+
+        li a {
+            color: $text-color;
+            text-decoration: none;
+            font-size: 1.2rem;
+
+            transition-property: color, text-decoration;
+            transition-duration: $transition-time;
+            transition-timing-function: ease-in-out;
+            transition-delay: $delay-time;
+
+            &:hover {
+                color: $hover-color;
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        @include transform(translateY(20px));
+    }
+
+    to {
+        opacity: 1;
+        @include transform(translateY(0));
+    }
+}
+
+.services {
+    padding: 2rem;
+    text-align: center;
+
+    .cards-container {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 2rem;
+
+        .card {
+            background: $card-bg-color;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 200px;
+
+            @include animation(fadeInUp 0.8s ease-out forwards);
+            opacity: 0; // Estado inicial
+
+            &:nth-child(1) {
+                animation-delay: 0.1s;
+            }
+
+            &:nth-child(2) {
+                animation-delay: 0.3s;
+            }
+
+            &:nth-child(3) {
+                animation-delay: 0.5s;
+            }
+        }
+    }
+}
